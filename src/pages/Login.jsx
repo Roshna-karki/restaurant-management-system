@@ -7,7 +7,6 @@ import google from '../assets/google.png';
 import apple from '../assets/apple.png';
 import email from '../assets/email.png';
 
-// Moved LoginScreen outside Login component
 const LoginScreen = ({ formData, handleInputChange, error, handleContinue, handleSocialLogin }) => (
   <div className="auth-container">
     <div className="header">
@@ -77,7 +76,51 @@ const LoginScreen = ({ formData, handleInputChange, error, handleContinue, handl
   </div>
 );
 
-// Moved RegisterScreen outside Login component
+const VerificationScreen = ({ formData, handleVerificationInputChange, verificationCode, verificationError, handleVerify, handleBack, handleResend }) => (
+  <div className="auth-container">
+    <div className="register-header">
+      <button onClick={handleBack} className="back-button">
+        <ChevronLeft size={24} />
+      </button>
+      <div className="progress-container">
+        <span className="progress-text">Verify </span>
+        <span className="progress-done">Phone Number</span>
+        <span className="checkmark">📱</span>
+      </div>
+    </div>
+    <div className="content">
+      <div className="register-welcome">
+        <p className="register-subtitle">
+          We've sent a 6-digit verification code to +977{formData.phoneNumber}. Please enter it below.
+        </p>
+      </div>
+      {verificationError && <p className="error-message">{verificationError}</p>}
+      <div className="form-container">
+        <div className="field-group">
+          <label className="field-label">
+            Verification Code <span className="required">*</span>
+          </label>
+          <input
+            type="text"
+            value={verificationCode}
+            onChange={(e) => handleVerificationInputChange(e.target.value)}
+            className="text-input"
+            placeholder="Enter 6-digit code"
+            maxLength={6}
+            autoFocus
+          />
+        </div>
+        <button onClick={handleVerify} className="finish-button">
+          Verify Code
+        </button>
+        <button onClick={handleResend} className="resend-button">
+          Resend Code
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
 const RegisterScreen = ({ formData, handleInputChange, showPassword, setShowPassword, showConfirmPassword, setShowConfirmPassword, error, handleContinue, handleBack, passwordRequirements }) => (
   <div className="auth-container">
     <div className="register-header">
@@ -172,7 +215,7 @@ const RegisterScreen = ({ formData, handleInputChange, showPassword, setShowPass
         </div>
         <div className="password-requirements">
           <p className="requirements-title">Your password must include:</p>
-          <ul className="requirements-list">
+          <ul class lName="requirements-list">
             <li className={`requirement-item ${passwordRequirements.length ? 'valid' : ''}`}>
               At least 8 characters
             </li>
@@ -193,7 +236,7 @@ const RegisterScreen = ({ formData, handleInputChange, showPassword, setShowPass
 );
 
 const Login = () => {
-  const [currentScreen, setCurrentScreen] = useState('login'); // 'login', 'register'
+  const [currentScreen, setCurrentScreen] = useState('login'); // 'login', 'verification', 'register'
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -203,10 +246,26 @@ const Login = () => {
     confirmPassword: ''
   });
   const [error, setError] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
+  const [verificationError, setVerificationError] = useState('');
+  const [otp, setOtp] = useState('');
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     setError(''); // Clear error on input change
+  };
+
+  const handleVerificationInputChange = (value) => {
+    setVerificationCode(value);
+    setVerificationError(''); // Clear verification error on input change
+  };
+
+  const generateOtp = () => {
+    const newOtp = Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit OTP
+    setOtp(newOtp);
+    // Simulate SMS by showing OTP in alert (replace with SMS API in production)
+    alert(`Your verification code is: ${newOtp}`);
+    console.log(`Generated OTP: ${newOtp}`); // For debugging
   };
 
   const validatePassword = (password) => {
@@ -226,8 +285,14 @@ const Login = () => {
         setError('Please enter a phone number');
         return;
       }
-      setCurrentScreen('register');
-    } else {
+      // Basic phone number validation (10 digits for Nepal)
+      if (!/^\d{10}$/.test(formData.phoneNumber.replace(/\D/g, ''))) {
+        setError('Please enter a valid 10-digit phone number');
+        return;
+      }
+      generateOtp();
+      setCurrentScreen('verification');
+    } else if (currentScreen === 'register') {
       if (
         !formData.fullName.trim() ||
         !formData.phoneNumber.trim() ||
@@ -253,10 +318,33 @@ const Login = () => {
     }
   };
 
+  const handleVerify = () => {
+    setVerificationError('');
+    if (!verificationCode.trim() || verificationCode.length !== 6 || !/^\d+$/.test(verificationCode)) {
+      setVerificationError('Please enter a valid 6-digit code');
+      return;
+    }
+    if (verificationCode !== otp) {
+      setVerificationError('Invalid verification code');
+      return;
+    }
+    setCurrentScreen('register');
+  };
+
+  const handleResend = () => {
+    setVerificationError('');
+    setVerificationCode('');
+    generateOtp();
+  };
+
   const handleBack = () => {
     setError('');
-    if (currentScreen === 'register') {
+    setVerificationError('');
+    setVerificationCode('');
+    if (currentScreen === 'verification') {
       setCurrentScreen('login');
+    } else if (currentScreen === 'register') {
+      setCurrentScreen('verification');
     }
   };
 
@@ -270,29 +358,43 @@ const Login = () => {
     }
   };
 
-  return currentScreen === 'login' ? (
-    <LoginScreen
-      currentScreen={currentScreen}
-      setCurrentScreen={setCurrentScreen}
-      formData={formData}
-      handleInputChange={handleInputChange}
-      error={error}
-      handleContinue={handleContinue}
-      handleSocialLogin={handleSocialLogin}
-    />
-  ) : (
-    <RegisterScreen
-      formData={formData}
-      handleInputChange={handleInputChange}
-      showPassword={showPassword}
-      setShowPassword={setShowPassword}
-      showConfirmPassword={showConfirmPassword}
-      setShowConfirmPassword={setShowConfirmPassword}
-      error={error}
-      handleContinue={handleContinue}
-      handleBack={handleBack}
-      passwordRequirements={passwordRequirements}
-    />
+  return (
+    <>
+      {currentScreen === 'login' && (
+        <LoginScreen
+          formData={formData}
+          handleInputChange={handleInputChange}
+          error={error}
+          handleContinue={handleContinue}
+          handleSocialLogin={handleSocialLogin}
+        />
+      )}
+      {currentScreen === 'verification' && (
+        <VerificationScreen
+          formData={formData}
+          handleVerificationInputChange={handleVerificationInputChange}
+          verificationCode={verificationCode}
+          verificationError={verificationError}
+          handleVerify={handleVerify}
+          handleBack={handleBack}
+          handleResend={handleResend}
+        />
+      )}
+      {currentScreen === 'register' && (
+        <RegisterScreen
+          formData={formData}
+          handleInputChange={handleInputChange}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+          showConfirmPassword={showConfirmPassword}
+          setShowConfirmPassword={setShowConfirmPassword}
+          error={error}
+          handleContinue={handleContinue}
+          handleBack={handleBack}
+          passwordRequirements={passwordRequirements}
+        />
+      )}
+    </>
   );
 };
 
