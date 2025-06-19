@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, Eye, EyeOff } from 'lucide-react';
 import './Login.css';
 import logo from '../assets/logo.jpg';
@@ -236,6 +237,7 @@ const RegisterScreen = ({ formData, handleInputChange, showPassword, setShowPass
 );
 
 const Login = () => {
+  const navigate = useNavigate(); // Initialize navigate hook
   const [currentScreen, setCurrentScreen] = useState('login'); // 'login', 'verification', 'register'
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -314,7 +316,7 @@ const Login = () => {
         setError('Password does not meet requirements');
         return;
       }
-      alert('Registration completed!');
+      navigate('/home');
     }
   };
 
