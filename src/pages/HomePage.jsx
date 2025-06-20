@@ -1,43 +1,30 @@
-import { Link } from 'react-router-dom';
-import logo from '../../public/Logo.png';
-import chef from '../assets/chef.jpg';
-import Donut from '../assets/Donut.jpg';
-import dal from '../assets/dal.jpg';
-import './HomePage.css';
+import { Link } from "react-router-dom";
+
+import chef from "../assets/chef.jpg";
+import Donut from "../assets/Donut.jpg";
+import dal from "../assets/dal.jpg";
+import "./HomePage.css";
+import Navbar from "../components/Navbar";
 
 const HomePage = () => {
   return (
     <div className="home-container">
-      <header className="header">
-        <div className="logo">
-          <img src={logo} alt="Spicebite Logo" className="logo-icon" />
-          <span className="logo-text">Spicebite</span>
-        </div>
-        <nav className="nav">
-          <a href="#features">Features</a>
-          <div className="dropdown">
-            <a href="#customer">Customer ▼</a>
-          </div>
-          <a href="#pricing">Pricing</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <div className="auth-buttons">
-          <button className="login-btn">Login</button>
-          <button className="start-free-btn">Start for Free</button>
-        </div>
-      </header>
+      <Navbar/>
 
       <main className="main-content">
         <div className="content-left">
           <p className="tagline">One App is Enough</p>
           <h1 className="main-title">
-            #1 Best <span className="highlight">Restaurant</span><br />
-            Management <span className="highlight">Software</span><br />
+            #1 Best <span className="highlight">Restaurant</span>
+            <br />
+            Management <span className="highlight">Software</span>
+            <br />
             in Nepal
           </h1>
           <p className="description">
-            With <span className="brand-highlight">SpiceBite</span> manage all your restaurant operations, orders, menu,
-            inventory, finance and more, all from one platform.
+            With <span className="brand-highlight">SpiceBite</span> manage all
+            your restaurant operations, orders, menu, inventory, finance and
+            more, all from one platform.
           </p>
           <div className="cta-buttons">
             <button className="start-free-main-btn">Start for Free →</button>
@@ -52,27 +39,32 @@ const HomePage = () => {
                 <img src={chef} alt="Chef" className="chef-icon" />
               </div>
             </div>
-            <div className="inventory-card animate-bounce">
-              <div className='flex flex-col items-center'>
-              <div className="card-header">
-                <span className="card-title">Inventory | lentils</span>
+            <div className="inventory-card float-animation">
+              <div className="flex flex-col items-center rounded-lg  ">
+                <div className="card-header ">
+                  <span className="card-title">Inventory | lentils</span>
+                </div>
+                <div className="dal-image">
+                  <img src={dal} alt="dal" className="dal-icon" />
+                </div>
               </div>
-              <div className="dal-image">
-                <img src={dal} alt="dal" className="dal-icon" />
-              </div>
-              </div>
-              <div className="inventory-stats">
+              <div className="inventory-stats flex ">
                 <div className="stat-row">
                   <span className="stat-label">Opening Stock</span>
-                  <span className="stat-value"> 30<sub>kg</sub></span>
+                  <span className="stat-value">
+                    {" "}
+                    30<sub>kg</sub>
+                  </span>
                 </div>
-                <div className="stat-row">
+                <div className="stat-row ">
                   <span className="stat-label">Closing Stock</span>
-                  <span className="stat-value">12<sub>kg</sub></span>
+                  <span className="stat-value">
+                    12<sub>kg</sub>
+                  </span>
                 </div>
               </div>
             </div>
-            <div className="order-card animate-bounce">
+            <div className="order-card float-animation-2">
               <div className="order-header">
                 <span className="order-title">New Order Received</span>
                 <span className="notification-icon">🔔</span>
@@ -94,6 +86,21 @@ const HomePage = () => {
           </div>
         </div>
       </main>
+
+      <div className="overflow-hidden whitespace-nowrap relative w-full bg-white py-4">
+  <div className="slider inline-block animate-marquee">
+    <img src="/brands/brand1.png" alt="Brand 1" className="inline-block mx-8 h-12" />
+    <img src="/brands/brand2.png" alt="Brand 2" className="inline-block mx-8 h-12" />
+    <img src="/brands/brand3.png" alt="Brand 3" className="inline-block mx-8 h-12" />
+    <img src="/brands/brand4.png" alt="Brand 4" className="inline-block mx-8 h-12" />
+    {/* <!-- Repeat set for infinite feel --> */}
+    <img src="/brands/brand1.png" alt="Brand 1" className="inline-block mx-8 h-12" />
+    <img src="/brands/brand2.png" alt="Brand 2" className="inline-block mx-8 h-12" />
+    <img src="/brands/brand3.png" alt="Brand 3" className="inline-block mx-8 h-12" />
+    <img src="/brands/brand4.png" alt="Brand 4" className="inline-block mx-8 h-12" />
+  </div>
+</div>
+
     </div>
   );
 };
