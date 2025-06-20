@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, Eye, EyeOff } from 'lucide-react';
-import './Login.css';
 import logo from '../assets/logo.jpg';
 import flag from '../assets/flag.png';
 import google from '../assets/google.png';
 import apple from '../assets/apple.png';
 import email from '../assets/email.png';
+import "../style/Login.css";
 
 const LoginScreen = ({ formData, handleInputChange, error, handleContinue, handleSocialLogin }) => (
   <div className="auth-container">

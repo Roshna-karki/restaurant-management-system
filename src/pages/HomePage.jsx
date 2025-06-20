@@ -1,10 +1,22 @@
-import { Link } from "react-router-dom";
 
-import chef from "../assets/chef.jpg";
+
 import Donut from "../assets/Donut.jpg";
 import dal from "../assets/dal.jpg";
-import "./HomePage.css";
+import "../style/HomePage.css";
 import Navbar from "../components/Navbar";
+import chef from '../assets/Chef.jpg';
+
+
+import thaiinbox from '../assets/thaiinbox.jpg';
+import spicesea from '../assets/spicesea.jpg';
+import retaent from '../assets/retaent.jpg';
+import ninnin from '../assets/ninnin.jpg';
+import coffee from '../assets/coffee.jpg';
+import dimsum from '../assets/dimsum.jpg';
+import grannykitchen from '../assets/dal.jpg';
+import karem from '../assets/karem.jpg';
+
+import '../style/HomePage.css';
 
 const HomePage = () => {
   return (
@@ -101,6 +113,20 @@ const HomePage = () => {
   </div>
 </div>
 
+      {/* Trusted Section */}
+      <section className="trusted-section">
+        <h2 className="trusted-title">Trusted by 10,000+ Restaurants</h2>
+        <div className="trusted-logos">
+          <img src={spicesea} alt="Spice Sea" className="logo-item" />
+          <img src={thaiinbox} alt="Thai Inbox" className="logo-item" />
+          <img src={retaent} alt="Retaent" className="logo-item" />
+          <img src={ninnin} alt="Nin Nin" className="logo-item" />
+          <img src={karem} alt="Karem" className="logo-item" />
+          <img src={grannykitchen} alt="Granny Kitchen" className="logo-item" />
+          <img src={coffee} alt="Coffee" className="logo-item" />
+          <img src={dimsum} alt="Dim Sum" className="logo-item" />
+        </div>
+      </section>
     </div>
   );
 };

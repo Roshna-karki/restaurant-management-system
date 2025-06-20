@@ -6,7 +6,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  overflow: hidden; /* Prevent body scroll */
+  overflow: hidden; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,7 +21,6 @@ body {
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  overflow-y: auto; /* Allow internal scrolling only if needed */
   overflow-x: hidden;
 }
 
@@ -35,11 +34,11 @@ body {
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 6px; /* Reduced gap */
+  gap: 6px; 
 }
 
 .logo-icon {
-  width: 40px; /* Smaller logo */
+  width: 40px;
   height: 40px;
   border-radius: 4px;
   display: flex;
@@ -51,7 +50,7 @@ body {
 }
 
 .logo-text {
-  font-size: 20px; /* Smaller text */
+  font-size: 20px; 
   font-weight: bold;
   color: #ffffff;
 }
@@ -59,8 +58,7 @@ body {
 .register-header {
   display: flex;
   align-items: center;
-  padding: 12px 24px; /* Reduced padding */
-  position: relative;
+  padding: 12px 24px; 
   flex-shrink: 0;
 }
 
@@ -117,43 +115,43 @@ body {
 
 .welcome-section {
   text-align: center;
-  margin-bottom: 20px; /* Much smaller margin */
+  margin-top: 20px; 
 }
 
 .welcome-title {
-  font-size: 24px; /* Smaller title */
+  font-size: 24px; 
   font-weight: bold;
   color: #ffffff;
-  margin: 0 0 10px 0; /* Smaller margin */
+  margin: 0 0 10px 0; 
 }
 
 .welcome-subtitle {
-  font-size: 14px; /* Smaller subtitle */
+  font-size: 14px; 
   color: #B3B3B3;
   line-height: 1.4;
   margin: 0;
 }
 
 .register-welcome {
-  margin-bottom: 16px; /* Much smaller */
+  margin-bottom: 16px;
   text-align: center;
 }
 
 .register-subtitle {
-  font-size: 14px; /* Smaller */
+  font-size: 14px; 
   color: #B3B3B3;
   line-height: 1.4;
   margin: 0;
 }
 
 .input-group {
-  margin-bottom: 16px; /* Much smaller */
+  margin-bottom: 16px; 
 }
 
 .phone-input-container {
   display: flex;
   border: 1px solid #404040;
-  border-radius: 6px; /* Smaller radius */
+  border-radius: 6px; 
   overflow: hidden;
 }
 
@@ -161,15 +159,15 @@ body {
   display: flex;
   align-items: center;
   background-color: #2D2D2D;
-  padding: 12px 10px; /* Smaller padding */
+  padding: 12px 10px; 
   border-right: 1px solid #404040;
   gap: 6px;
-  font-size: 13px; /* Smaller font */
+  font-size: 13px; 
   color: #ffffff;
 }
 
 .nepal-flag {
-  width: 28px; /* Smaller flag */
+  width: 28px; 
   height: 24px;
   border-radius: 2px;
   position: relative;
@@ -430,17 +428,18 @@ body {
   width: 100%;
   background-color: #2D2D2D;
   border: 1px solid #404040;
-  padding: 14px; /* Smaller padding */
+  padding: 15px;
   border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  font-size: 14px; /* Smaller font */
+  gap: 20px;
+  font-size: 14px;
   font-weight: 500;
   color: #ffffff;
   cursor: pointer;
-  transition: all 0.2s;
+  margin-top:10px;
+
 }
 
 .social-button:hover {
@@ -449,7 +448,7 @@ body {
 }
 
 .google-icon {
-  width: 18px; /* Smaller icons */
+  width: 18px; 
   height: 18px;
   border-radius: 50%;
   display: flex;
